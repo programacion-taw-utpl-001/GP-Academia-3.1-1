@@ -1,0 +1,36 @@
+
+{% extends "master.html" %}
+
+{% block titulo %}
+	MAPA
+{% endblock %}
+
+{% block contenido %}
+	{% for f in paginas %}
+		<div class="col-xs-12 col-sm-4">
+			<div class="row borde">
+	    		<div class="col-xs-12">
+	    			<div class="row">
+	    				<img class="img-responsive img-rounded" src='{{ f.url }}'>
+	    				<input type="hidden" id="{{ f.idurl }}">
+	    			</div>
+	    		</div>	    		
+			</div>
+		</div>
+	{% endfor %}
+	<!--<div class="clearfix visible-xs-block"></div>-->
+
+	<div class="pagination text-center text-info font-4 col-xs-12">
+	    <span class="step-links">
+	        {% if paginas.has_previous %}
+	            <a href="?page={{ paginas.previous_page_number }}">Anterior</a>
+	        {% endif %}
+	        <span class="current">
+	            {{ paginas.number }} de {{ paginas.paginator.num_pages }}.
+	        </span>
+	        {% if paginas.has_next %}
+	            <a id="linkpaginas" href="?page={{ paginas.next_page_number }}">Siguiente</a>
+	        {% endif %}
+	    </span>
+	</div>
+{% endblock %}

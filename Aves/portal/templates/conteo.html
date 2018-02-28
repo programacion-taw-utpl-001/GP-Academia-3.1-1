@@ -1,0 +1,284 @@
+{% extends "master.html" %}
+
+{% block titulo %}
+	Detalle por provincias
+{% endblock %}
+
+{% block contenido %}
+	<div class="col-xs-12">
+		<h3 class="col-xs-12 borde">Ecuador</h3>
+		<section class="blanco datatablas">
+			<table id="example" class="display" width="100%">
+				<thead>
+	                <tr class="success">
+	                    <th>Codigo de Provincia</th>
+	                    <th>Provincia</th>
+	                    <th>Total de Aves</th>
+	                </tr>
+	            </thead>
+	            <tfoot>
+	            	<tr class="info">
+	                    <th>Codigo de Provincia</th>
+	                    <th>Provincia</th>
+	                    <th>Total de Aves</th>
+	                </tr>
+	            </tfoot>
+	            <tbody class="searchable">
+	            	{% for p in contEc %}
+						<tr>
+							<td>{{p.0}}</td>
+							<td>{{p.1}}</td>
+							<td>{{p.2}}</td>
+						</tr>
+					{% endfor %}
+	            </tbody>
+		    </table>
+		</section>
+	</div>
+	<div class="col-xs-12">
+		<h3 class="col-xs-12 borde">Perú</h3>
+		<section class="blanco datatablas">
+			<table id="example2" class="display" width="100%">
+				<thead>
+	                <tr class="success">
+	                    <th>Codigo de Provincia</th>
+	                    <th>Provincia</th>
+	                    <th>Total de Aves</th>
+	                </tr>
+	            </thead>
+	            <tfoot>
+	            	<tr class="info">
+	                    <th>Codigo de Provincia</th>
+	                    <th>Provincia</th>
+	                    <th>Total de Aves</th>
+	                </tr>
+	            </tfoot>
+	            <tbody class="searchable">
+	            	{% for p in contPe %}
+						<tr>
+							<td>{{p.0}}</td>
+							<td>{{p.1}}</td>
+							<td>{{p.2}}</td>
+						</tr>
+					{% endfor %}
+	            </tbody>
+		    </table>
+		</section>
+	</div>
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-6">
+				<div id="compara"></div>
+			</div>
+			<div class="col-xs-6">
+				<div id="cuadropaises"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script type="text/Javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+	<script src="https://code.highcharts.com/modules/heatmap.js"></script>
+	<script src="https://code.highcharts.com/modules/treemap.js"></script>
+	<script type="text/javascript">
+	    jQuery(document).ready(function ($) {
+	        console.log('llegando');
+
+	        $(document).ready(function() {
+				$('#example').DataTable();
+			});
+			$(document).ready(function() {
+				$('#example2').DataTable();
+			});
+
+			Highcharts.chart('compara', {
+
+			    title: {
+			        text: 'Aves por País'
+			    },
+
+			    subtitle: {
+			        text: 'Conteo por Procinvias'
+			    },
+
+			    yAxis: {
+			        title: {
+			            text: 'Número de Aves'
+			        }
+			    },
+			    legend: {
+			        layout: 'vertical',
+			        align: 'right',
+			        verticalAlign: 'middle'
+			    },
+
+			    plotOptions: {
+			        series: {
+			            label: {
+			                connectorAllowed: false
+			            },
+			            pointStart: 2000
+			        }
+			    },
+
+			    series: [{
+			        name: 'ECUADOR',
+			        data: [
+			        		{% for e in contEc %}
+								{{e.2}},
+							{% endfor %}
+						]
+			    }, {
+			        name: 'PERÚ',
+			        data: [
+				        	{% for p in contPe %}
+								{{p.2}},
+							{% endfor %}
+						]
+			    }],
+			    responsive: {
+			        rules: [{
+			            condition: {
+			                maxWidth: 500
+			            },
+			            chartOptions: {
+			                legend: {
+			                    layout: 'horizontal',
+			                    align: 'center',
+			                    verticalAlign: 'bottom'
+			                }
+			            }
+			        }]
+			    }
+			});
+
+			//cuadros lugares
+	        var data = {
+		        {% for pais in listapais %}
+					'{{ pais.0.nombpais }}': {
+						{% for provincia in pais.1 %}
+							'{{provincia.0.nombprovincia}}': {
+								{% for lugares in provincia.1 %}
+									'{{ lugares.0 }}': '{{ lugares.1 }}',
+								{% endfor %}
+							},
+						{% endfor %}
+			        },
+		        {% endfor %}
+		     //    'Eastern Mediterranean': {
+		     //        'Egypt': {
+		     //            'Communicable & other Group I': '74.3',
+		     //            'Noncommunicable diseases': '781.7',
+		     //            'Injuries': '33.5'
+		     //        },
+		     //        'Tunisia': {
+		     //            'Noncommunicable diseases': '509.3',
+		     //            'Communicable & other Group I': '65.0',
+		     //            'Injuries': '39.1'
+		     //        }
+		     //    },
+		     //    'Western Pacific': {
+		     //        'Mongolia': {
+		     //            'Injuries': '69.4',
+		     //            'Noncommunicable diseases': '966.5',
+		     //            'Communicable & other Group I': '82.8'
+		     //        },
+		     //        'Republic of Korea': {
+		     //            'Injuries': '53.1',
+		     //            'Communicable & other Group I': '33.8',
+		     //            'Noncommunicable diseases': '302.1'
+		     //        }
+		    	// }
+			},
+		    points = [],
+		    regionP,
+		    regionVal,
+		    regionI = 0,
+		    countryP,
+		    countryI,
+		    causeP,
+		    causeI,
+		    region,
+		    country,
+		    cause,
+		    causeName = {
+		        'Communicable & other Group I': 'Communicable diseases',
+		        'Noncommunicable diseases': 'Non-communicable diseases',
+		        'Injuries': 'Injuries'
+		    };
+
+			for (region in data) {
+			    if (data.hasOwnProperty(region)) {
+			        regionVal = 0;
+			        regionP = {
+			            id: 'id_' + regionI,
+			            name: region,
+			            color: Highcharts.getOptions().colors[regionI]
+			        };
+			        countryI = 0;
+			        for (country in data[region]) {
+			            if (data[region].hasOwnProperty(country)) {
+			                countryP = {
+			                    id: regionP.id + '_' + countryI,
+			                    name: country,
+			                    parent: regionP.id
+			                };
+			                points.push(countryP);
+			                causeI = 0;
+			                for (cause in data[region][country]) {
+			                    if (data[region][country].hasOwnProperty(cause)) {
+			                        causeP = {
+			                            id: countryP.id + '_' + causeI,
+			                            name: causeName[cause],
+			                            parent: countryP.id,
+			                            value: Math.round(+data[region][country][cause])
+			                        };
+			                        regionVal += causeP.value;
+			                        points.push(causeP);
+			                        causeI = causeI + 1;
+			                    }
+			                }
+			                countryI = countryI + 1;
+			            }
+			        }
+			        regionP.value = Math.round(regionVal / countryI);
+			        points.push(regionP);
+			        regionI = regionI + 1;
+			    }
+			}
+			Highcharts.chart('cuadropaises', {
+			    series: [{
+			        type: 'treemap',
+			        layoutAlgorithm: 'squarified',
+			        allowDrillToNode: true,
+			        animationLimit: 1000,
+			        dataLabels: {
+			            enabled: false
+			        },
+			        levelIsConstant: false,
+			        levels: [{
+			            level: 1,
+			            dataLabels: {
+			                enabled: true
+			            },
+			            borderWidth: 3
+			        }],
+			        data: points
+			    }],
+			    subtitle: {
+			        text: 'Clic para ver detalle.'
+			    },
+			    title: {
+			        text: 'Visualización detallada.'
+			    }
+			});
+		});
+	</script>
+{% endblock %}

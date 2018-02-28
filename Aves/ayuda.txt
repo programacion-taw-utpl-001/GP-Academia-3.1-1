@@ -1,0 +1,112 @@
+<form action="" method="post">
+		{% csrf_token %}
+		<select name="tipolicencia" id="">
+			<option>--------------</option>
+			{%for c in tipolicencia%}
+				<option value="{{c.idtiplic}}">{{c.nombre}}</option>
+			{%endfor%}
+		</select>
+		<button class="btn btn-primary btn-lg" type="submit" name="licencias">Licencias</button>
+	</form>
+
+--Vista--
+if request.method=="POST" and 'licencias' in request.POST:
+        print "-->"+request.POST["tipolicencia"]
+        idlic=int(request.POST["tipolicencia"])
+        #v = document.getElementByID("tipolicencia").value
+        #print v
+        urlfotos = Imagen.objects.filter(idlicencia=idlic)
+        
+____________________________________________________________
+
+<div class="container">
+		<h4>Amenazas</h4>
+	    {% for v in vamenazas.listamenazas %}
+			<p class="col-xs-3" id="{{ v.idamenaza }}"> {{ v.clasificacion }}</p>
+	    {% endfor %}
+	    <hr>
+    	<h4>Aves</h4>
+    	{% for av in vaves.aves %}
+			<p class="col-xs-3" id="{{av.codigo}}">{{ av.codigoespecie }}</p>
+			<p class="col-xs-3">{{ av.namebird }}</p>
+			<p class="col-xs-3">{{ av.sinonimo }}</p>
+	    {% endfor %}
+	    <h4>Autores</h4>
+		{% for p in vlista %}
+			<p>{{ p.idautor }} {{p.autor}}  {{ p.bibliografia }} {{ p.a_opublicacion }}</p>
+			<!--<p>{{ p.a_orecoleccion }}</p>
+			<p>{{ p.fecha }}</p>
+			<hr>-->
+    	{% endfor %}
+	</div>
+____________________________________________________________
+
+
+para la imagen responsive
+
+class="img-rounded"		efecto cuadro con bordes
+class="img-circle"		efecto circulo
+class="img-thumbnail"	efecto cuadro con contorno-borde
+____________________________________________________________
+
+
+para consultas ORM (views)
+"""
+ordenar (campo) orden inverso ("­-nombre")
+Editor.objects.order_by("nombre")
+where ?? y ??
+Editor.objects.filter(ciudad="Berkeley", estado="CA") 
+WHERE nombre LIKE '%press%' ;
+Editor.objects.filter(nombre__contains="press") 
+para un unico objeto
+Editor.objects.get(nombre="Apress Publishing") 
+
+LIMITE DE DATOS
+En cambio filter()[0], no hace saltar ninguna excepción.
+Limitar el número de registros devueltos
+Entry.objects.all()[:5]  # los cinco primeros
+Entry.objects.all()[5:10]  # del quinto al décimo
+
+limite de consulta LIMIT 1; 
+Editor.objects.all()[0] 
+
+Objeto.objects.all() -> Todo el conjunto
+Objeto.objects.filter() -> Un filtro para incluir
+Objeto.objects.exclude() -> Un filtro para excluir
+Objeto.objects.get() -> Busca un solo objeto
+
+Entry.objects.filter(pub_date__isnull=True)
+Blogs.objects.filter(entry__headline__contains=’Pep’, entry__pub_date__year=2006) 
+Todos los blogs que tengan alguna entrada cuyo titulo tenga Pep y se haya publicado en 2006
+Blogs.objects.filter(entry__headline__contains=’Pep’).filter(entry__pub_date__year=2006) 
+Todos los que tengan Pep y todos los que se hayan publicado en 2006
+
+ORDENAR
+Entry.objects.filter(pub_date__year=2005).order_by('-pub_date', 'headline')
+The result above will be ordered by pub_date descending, then by headline ascending.
+
+actualizar
+Editor.objects.filter(id=1).update(nombre='Apress Publishing') 
+eliminar
+Editor.objects.filter(ciudad='USA').delete() 
+
+
+SI NO HAY DATOS
+Si no hay datos salta la excepción DoesNotExist
+
+from django.core.exceptions import ObjectdoesNotExist
+try:
+	one_entry=Entry.object.get(pk=numero)
+except ObjectDoesNotExist, e:
+	mensaje=("La entrada %n no existe" % (numero))
+
+opcional
+try:
+	p = Editor.objects.get(nombre='Apress') 
+except Editor.DoesNotExist:
+	print ("Apress no está en la base de datos.")
+else:
+	print ("Apress está en la base de datos.") 
+"""
+____________________________________________________________
+

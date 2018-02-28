@@ -1,0 +1,429 @@
+{% load static %}
+/*Fuentes*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');
+
+@import 'https://code.highcharts.com/css/highcharts.css';
+
+/*GRIFICA AMENAZAS*/
+#container {
+	height: 400px;
+	max-width: 800px;
+	min-width: 320px;
+	margin: 0 auto;
+}
+
+#compara {
+	min-width: 310px;
+	max-width: 800px;
+	height: 400px;
+	margin: 0 auto
+}
+#gbarras {
+	min-width: 310px;
+	height: 400px;
+	margin: 0 auto;
+}
+#cuadropaises {
+	min-width: 300px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+#graficalineas {
+	min-width: 300px;
+    max-width: 800px;
+    height: 400px;
+    margin: 1em auto;
+    border: 1px solid silver;
+}
+#csv {
+	display: none;
+}
+/*Estilos Etiquetas html*/
+body{
+    margin: 0;
+    /*
+    contorno alrededor dl contenido > d izq-der
+    */
+    padding: 1%;
+	margin: 0 auto;
+	font-family: 'Roboto', sans-serif;
+	background-color: #FFF;
+    box-sizing: border-box;
+    /*le agrega a fuerzas el tamñao asignado por el uso de padding*/
+    background: url('{% static 'icon/logo.png' %}');
+}
+
+#fondo {
+  width: 400px;
+  text-align: center; 
+  background: #fff;
+  margin: 150px auto 0 auto;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+nav {
+	background-color: #AFD476;
+	text-align: center;
+    /*le agrega a fuerzas el tamñao asignado por el uso de padding*/
+}
+
+nav ul {
+	overflow: hidden;
+	list-style: none;
+}
+
+nav ul li{
+    float: left;
+    border-radius: 5px;
+}
+
+nav ul li a {
+    margin-left: 0px;
+	display: block;
+	text-decoration: none;
+    box-sizing: border-box;
+    /*le agrega a fuerzas el tamñao asignado por el uso de padding*/
+}
+
+nav ul li a span {
+	margin-right: 30px;
+    /*da un espacio entre el icono y el texto*/
+    font-size: 4em;
+    text-align: center;
+}
+
+nav ul li:hover {
+	background: yellow;
+    /*cambia el color del link al pasar el mouse*/
+}
+/*Revisar resalte*/
+nav ul li a:hover {
+	background: #FFFFFF;
+	color: #01579B;
+    /*cambia el color del link al pasar el mouse*/
+    text-decoration:none;
+    list-style: none;
+}
+
+/*nuevo formato menu*/
+button{
+	color: #0E0000;
+	text-decoration:none;
+    box-sizing: border-box;
+    /*le agrega a fuerzas el tamñao asignado por el uso de padding*/
+    font-size: 0.9em;
+    transition: all 2s ease;
+}
+
+button span{
+	margin-right:15px;
+    /*da un espacio entre el icono y el texto*/
+    font-size: 1em;
+    box-sizing: border-box;
+    /*le agrega a fuerzas el tamñao asignado por el uso de padding*/
+}
+button:hover {
+	background: #E8E942;
+    /*cambia el color del link al pasar el mouse*/
+}
+button span:hover {
+	background: #E8E942;
+}
+
+/*
+img{
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+*/
+/*IR al INICIO de la PAGINA WEB*/
+.ir-arriba {
+    /*no se muestra el icono cuando esta al inicio*/
+	padding:20px;
+    /*relleno*/
+	background: #0D33EA;
+	/*tamaño de fuente*/
+	font-size:20px;
+	/*color a fuente*/
+	color:#fff;
+	/*para tener el efecto de enlace*/
+	cursor:pointer;
+    /*posicion fija*/
+	position: fixed;
+    /*margen abajo*/
+	bottom:20px;
+    /*margen derecha*/
+	right:20px;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+#titulo, #subtitulo{
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+    font-style: italic;
+}
+h1 {
+  position: absolute;
+  top: 500px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+ 
+}
+h1 span {
+  color: white;
+  font: bold 24px/45px Helvetica, Sans-Serif;
+  letter-spacing: -1px;
+  padding: 10px;
+  padding-top: 10px;
+  border-radius: 5px;
+}
+hgroup{
+	padding-top: 5em;
+	background-color: grey;
+	width: 600px;
+}
+.principal{
+	width: 100%;
+	padding-top: 0em;
+	background-color: grey;
+}
+
+/*Estilos cabecera*/
+hr {
+  height: 1px;
+  border: 1px solid gray;
+}
+
+footer {
+	margin: 0;
+    /*
+    contorno alrededor dl contenido > d izq-der
+    */
+    padding: 1%;
+	margin: 0 auto;
+	font-family: 'Raleway';
+	background: #3B3B3B;
+	color: #F2F2F2;
+	padding: 0.5em 2em;
+	text-align: center;
+	overflow: hidden;
+	box-sizing: border-box;
+    /*le agrega a fuerzas el tamñao asignado por el uso de padding*/
+}
+h1{
+	text-align: center;
+	font-family: Roboto;
+}
+
+h3{
+	text-align: center;
+	font-family: Arial;
+}
+p{
+	text-align: justify;
+}
+
+.font-5 {
+	font-size: 	1.5em;
+}
+.font-4 {
+	font-size: 1.2em
+}
+.font-3 {
+	font-size: 1em
+}
+.font-peque {
+	font-size: 	100%;
+}
+.font-medio {
+	font-size: 200%;
+}
+.font-grande {
+	font-size: 300%;
+}
+
+
+/*Colores*/
+.celeste {
+	background: #1E9E9E;
+}
+.azul {
+	background: #01579B;
+}
+.azul1 {
+	background: #E8DAD1;
+	position: absolute;
+	width: 110px;
+	padding-left: 0em;
+	padding-right: 0em;
+}
+.containernav{
+	padding-left: 0.5em;
+	padding-top: 0.5em;
+}
+.container1{
+	padding-top: 7em;
+	padding-left: 2.6em;
+	width: 96.97%;
+}
+.rojo {
+	background: #F84339;
+}
+.dorado{
+	background: #F5AC35;
+}
+.verde {
+	background: #109D59;
+}
+.verde {
+	background: #109D59;
+	border-radius: 5px;
+}
+.naranja {
+	background: #FC6C2E;
+}
+.gris {
+	background: #E0E0E0;
+}
+.gris2 {
+	background: #3B3B3B;
+}
+.amarillo {
+	background: #F3F210;
+}
+.negro {
+	background: #000000;
+}
+.negro2 {
+	background: transparent;
+}
+.verde2 {
+	background: #24E897;
+}
+.blanco {
+	background: #FFFFFF;
+}
+.naranja2 {
+	background: #EA731D;
+}
+.textblanco {
+	color: #FFFFFF;
+}
+.textazul {
+	color: #0D33EA;
+}
+/*#tcn{
+	background-color: #E0E0E0;
+}*/
+
+/*Grafica Amenazas*/
+#donutchart{
+	width: 900px;
+	height: 500px;
+}
+
+/*ESTILOS para el segmento, de compartir*/
+/* Facebook */
+.facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.twitter {
+    background: #55ACEE;
+    color: white;
+}
+/* Twitter */
+.instagram {
+    background: #4c68d7;
+    color: white;
+}
+/* whatsapp */
+.whatsapp {
+    background: #4AB315;
+    color: white;
+}
+/* comparte */
+.comparte {
+    background: #D9B727;
+    color: white;
+}
+
+/*tabla INDEX*/
+.datatablas{
+	background: #4BB6AD;
+	color: #070707;
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+#balkButton {
+	border-radius: 4px;
+	padding: 8px;
+	border: none;
+	font-size: 16px;
+	background-color: #2eacd1;
+	color: white;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+.invisible {
+	display: none;
+}
+
+/* MAPA --no cambiar */
+#map-canvas{
+	width: 100%;
+	height: 800px;
+}
+
+/*GRAFICA*/
+.estadis{
+	width: 100% !important;
+	height: 800px !important;
+}
+.col-xs-111 {
+  width: 99% !important;
+  padding-left: 2em;
+  background-color: red;
+}
+#myChart{
+	width: 80% !important;
+	height: 80% !important;
+}
+
+/*galeria*/
+.borde{
+	border-radius: 20px;
+	background-color: #017CFF;
+	color: #000000;
+}
+.borde2{
+	border-left-color: #000000;
+	border-left-style: dashed;
+	border-left-width: 1px;
+	border-right-color: #000000;
+	border-right-style: dashed;
+	border-right-width: 1px;
+}
+
+.borde3{
+	border-radius: 20px;
+	background-color: #000000;
+	color: #FFFFFF;
+}
